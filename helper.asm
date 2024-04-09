@@ -8,7 +8,7 @@ string_length_loop:
     add eax, 1
     jmp string_length_loop
 string_length_done:
-    sub ebx, 1
+    ;sub ebx, 1
     mov eax, ebx
     ret
 
@@ -27,13 +27,12 @@ print_new_line:
 
 print_message:
     push eax
-    mov ecx, esp
+    mov ecx, [esp]
     pop eax
     call string_length
     mov edx, eax
     mov eax, 4
     mov ebx, 1
-    mov ecx, msg
     int 80h
     ret
 
@@ -113,3 +112,19 @@ print_integer:
         call print_one_number
         call print_new_line
     ret
+
+string_to_int:
+    mov esi, eax
+    xor eax, eax
+    mov ebx, 10
+    string_to_int_loop:
+        movzx ecx, byte [esi]
+        add esi, 1
+        cmp ecx, 0
+        jz string_to_int_done
+        sub ecx, '0'
+        mul ebx
+        add eax, ecx
+        jmp string_to_int_loop
+    string_to_int_done:
+        ret
