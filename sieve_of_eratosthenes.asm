@@ -27,7 +27,7 @@ _start:
     jmp _fill_loop
 next_step:
     mov esi, 1
-    mov ebx, -4
+    mov ebx, -8
 
     fetch_loop:
         mov eax, [ebp + ebx]
@@ -56,27 +56,23 @@ next_step:
         mov edi, -4
     write_loop:
         mov eax, [ebp + edi]
-        ;add eax, 48
         cmp eax, [zero]
         je no_prime
-       cmp esi, 10
-       jg g_than_10
-       mov eax, esi
-       add eax, 48
-       call print_one_number
-       call print_new_line
-       jmp no_prime
-       g_than_10:
+        cmp esi, 10
+        jg g_than_10
         mov eax, esi
-        push esi
-        push edi
-        call print_integer
-        pop edi
-        pop esi
+        add eax, 48
+        call print_one_number
+        call print_new_line
+        jmp no_prime
+        g_than_10:
+            mov eax, esi
+            push esi
+            push edi
+            call print_integer
+            pop edi
+            pop esi
         no_prime:
-
-        ;call print_one_number
-
 
         inc esi
         sub edi, 4
@@ -87,6 +83,8 @@ next_step:
     mov ebx, 0 
     mov eax, 1
     int 80h
+
+
 
 SECTION .data
 equal db "equal", 0ah
