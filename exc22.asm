@@ -1,4 +1,4 @@
-%include "64_library.asm"
+;%include "64_library.asm"
 
 section .text
 

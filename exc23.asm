@@ -90,6 +90,7 @@ _start:
         add rsp, 8
         cmp r10, 0
     jg print_loopl
+    call print_newline
     mov rax, 60 
     mov rdi, 0 
     syscall  
